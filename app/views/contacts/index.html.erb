@@ -1,0 +1,72 @@
+<h1><%= flash[:right] %></h1>
+<h1><%= flash[:wrong] %></h1>
+<h1>Welcome!</h1>
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>E-mail</th>
+    <th>Address</th>
+  </tr>
+  <% if !@contacts.nil? %>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.first_name %></td>
+        <td><%= contact.last_name %></td>
+        <td><%= contact.email %></td>
+        <td><%= contact.address %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<div>
+  <form action="/contacts/index" method="post">
+    <input type="text" name="first_name" placeholder="First Name" />
+    <input type="text" name="last_name" placeholder="Last Name" />
+    <input type="text" name="email" placeholder="E-mail" />
+    <input type="text" name="address" placeholder="Address" />
+    <input type="submit" value="Submit" />
+  </form>
+
+  <form action="/contacts/update" method="post">
+    <input type="text" name="u_id" placeholder="Update By First Name" required />
+    <input type="text" name="u_first_name" placeholder="First Name" />
+    <input type="text" name="u_last_name" placeholder="Last Name" />
+    <input type="text" name="u_email" placeholder="E-mail" />
+    <input type="text" name="u_address" placeholder="Address" />
+    <input type="submit" value="Update">
+  </form>
+
+  <form action='/contacts/destroy' method="post">
+    <input type="text" name="d_id" placeholder="Destroy By First Name" required />
+    <input type="submit" value="Destroy">
+  </form>
+
+  <form action='/contacts/sort' method='get'>
+    <input type="submit" value="Sort">
+  </form>
+</div>
+
+<div>
+  <form action="/contacts/add" method="post">
+    <input type="text" name="a_id" placeholder="Find Contact Numbers" required />
+    <input type="text" name="a_number" placeholder="Number" />
+    <input type="text" name="a_type" placeholder="Type" />
+    <input type="submit" value="Add">
+  </form>
+
+  <form action="/contacts/show" method="post">
+    <input type="text" name="s_id" />
+    <input type="submit" value="Show">
+  </form>
+</div>
+
+<ul>
+  <% if !@nums.nil? %>
+    <% @nums.each do |num| %>
+      <li><%= num.number %></li>
+    <% end %>
+    <li>There are <%= @how_many %></li>
+  <% end %>
+</ul>
