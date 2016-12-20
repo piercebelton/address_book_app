@@ -5,6 +5,9 @@ class ContactsController < ApplicationController
   end
 
   def index
+  end
+
+  def add_contact
     f_name = params[:first_name]
     l_name = params[:last_name]
     email = params[:email]
@@ -16,12 +19,13 @@ class ContactsController < ApplicationController
         last_name: l_name.strip,
         email: email.strip,
         address: address.strip)
-
       @contact.save
       flash.now[:right] = 'Added!'
     else
       flash.now[:wrong] = 'Incorrect contact information'
     end
+
+    render '/contacts/index'
   end
 
   def update
